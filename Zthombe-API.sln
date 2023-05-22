@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zthombe-API", "Zthombe-API\Zthombe-API.csproj", "{B26825A3-131F-4923-9E7D-E2F2ECA45904}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8B0C3BDF-CD0D-45D3-A0E8-7CF0D6C4EDD6} = {8B0C3BDF-CD0D-45D3-A0E8-7CF0D6C4EDD6}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zthombe.Data", "Zthombe.Data\Zthombe.Data.csproj", "{8B0C3BDF-CD0D-45D3-A0E8-7CF0D6C4EDD6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B26825A3-131F-4923-9E7D-E2F2ECA45904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B26825A3-131F-4923-9E7D-E2F2ECA45904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B26825A3-131F-4923-9E7D-E2F2ECA45904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B26825A3-131F-4923-9E7D-E2F2ECA45904}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B0C3BDF-CD0D-45D3-A0E8-7CF0D6C4EDD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B0C3BDF-CD0D-45D3-A0E8-7CF0D6C4EDD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B0C3BDF-CD0D-45D3-A0E8-7CF0D6C4EDD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B0C3BDF-CD0D-45D3-A0E8-7CF0D6C4EDD6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FFCCD174-C663-41D3-87DE-C624AFD62D72}
+	EndGlobalSection
+EndGlobal
