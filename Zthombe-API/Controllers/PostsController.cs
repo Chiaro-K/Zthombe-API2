@@ -23,5 +23,13 @@ namespace Zthombe_API.Controllers
             var posts = zthombeContext.Posts.Where(p=> p.UserId == userId).ToList();
             return Ok(posts);
         }
+        
+        [Route("GetPost/{postId}")]
+        [HttpGet]
+        public IActionResult GetPost(Guid postId)
+        {
+            var post = zthombeContext.Posts.Where(p=> p.PostId == postId).FirstOrDefault();
+            return Ok(post);
+        }
     }
 }
