@@ -34,6 +34,7 @@ public partial class ZthombeContext : DbContext
                 .HasColumnType("datetime");
             entity.Property(e => e.Description).HasMaxLength(500);
             entity.Property(e => e.ImageUrl).HasMaxLength(2000);
+            entity.Property(e => e.ImageThumbnaileUrl).HasMaxLength(2000);
             entity.Property(e => e.Title).HasMaxLength(150);
         });
 

@@ -14,6 +14,7 @@ public partial class Post
     public string? Description { get; set; }
 
     public string? ImageUrl { get; set; }
+    public string? ImageThumbnaileUrl { get; set; }
 
     public string? Tags { get; set; }
 
