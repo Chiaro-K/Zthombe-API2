@@ -27,19 +27,19 @@ public partial class ZthombeContext : DbContext
     {
         modelBuilder.Entity<Post>(entity =>
         {
-            entity.HasNoKey();
+            entity.HasKey(e => e.PostId);
 
             entity.Property(e => e.DateCreated)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Description).HasMaxLength(500);
-            entity.Property(e => e.ImageUrl).HasMaxLength(100);
+            entity.Property(e => e.ImageUrl).HasMaxLength(2000);
             entity.Property(e => e.Title).HasMaxLength(150);
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasNoKey();
+            entity.HasKey(e => e.UserId);
 
             entity.Property(e => e.Username).HasMaxLength(50);
         });

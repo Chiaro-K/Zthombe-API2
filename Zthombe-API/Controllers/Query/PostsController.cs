@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Zthombe.Data.Constants;
 using Zthombe_API.Models;
 
-namespace Zthombe_API.Controllers
+namespace Zthombe_API.Controllers.Query
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -20,15 +20,15 @@ namespace Zthombe_API.Controllers
         [HttpGet]
         public IActionResult GetPosts(Guid userId)
         {
-            var posts = zthombeContext.Posts.Where(p=> p.UserId == userId).ToList();
+            var posts = zthombeContext.Posts.Where(p => p.UserId == userId).ToList();
             return Ok(posts);
         }
-        
-        [Route("GetPost/{postId}")]
+
+        [Route("{postId}")]
         [HttpGet]
         public IActionResult GetPost(Guid postId)
         {
-            var post = zthombeContext.Posts.Where(p=> p.PostId == postId).FirstOrDefault();
+            var post = zthombeContext.Posts.Where(p => p.PostId == postId).FirstOrDefault();
             return Ok(post);
         }
     }
