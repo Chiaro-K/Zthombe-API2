@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zthombe_API.Models;
 
@@ -11,9 +12,11 @@ using Zthombe_API.Models;
 namespace Zthombe_API.Migrations
 {
     [DbContext(typeof(ZthombeContext))]
-    partial class ZthombeContextModelSnapshot : ModelSnapshot
+    [Migration("20230918120056_add-viewCount-to-posts")]
+    partial class addviewCounttoposts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,8 +69,6 @@ namespace Zthombe_API.Migrations
 
                     b.HasKey("PostId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Posts");
                 });
 
@@ -77,11 +78,6 @@ namespace Zthombe_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("FirebaseUserId")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<string>("Username")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -89,17 +85,6 @@ namespace Zthombe_API.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Zthombe_API.Models.Post", b =>
-                {
-                    b.HasOne("Zthombe_API.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

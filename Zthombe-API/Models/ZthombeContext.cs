@@ -36,13 +36,18 @@ public partial class ZthombeContext : DbContext
             entity.Property(e => e.ImageUrl).HasMaxLength(2000);
             entity.Property(e => e.ImageThumbnaileUrl).HasMaxLength(2000);
             entity.Property(e => e.Title).HasMaxLength(150);
+            entity.Property(e => e.ViewCount).HasDefaultValue(0);
+
+            entity.HasOne(e => e.User).WithMany().HasForeignKey(f => f.UserId);
         });
 
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.UserId);
 
+            entity.Property(e => e.UserId);
             entity.Property(e => e.Username).HasMaxLength(50);
+            entity.Property(e => e.FirebaseUserId).HasMaxLength(100);
         });
 
         OnModelCreatingPartial(modelBuilder);

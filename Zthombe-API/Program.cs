@@ -6,15 +6,18 @@ using Zthombe_API.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-const string corsPolicyName = "ApiCORS";
+//builder.WebHost.UseUrls("http://192.168.1.2:5000");
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(corsPolicyName, policy =>
-    {
-        policy.WithOrigins("https://localhost:4200");
-    });
-});
+
+//const string corsPolicyName = "ApiCORS";
+
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy(corsPolicyName, policy =>
+//    {
+//        policy.WithOrigins("https://localhost:4200");
+//    });
+//});
 
 // Add services to the container.
 
@@ -35,6 +38,7 @@ builder.Services.AddMvc()
         options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Include;
         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
     });
+
 
 var app = builder.Build();
 
