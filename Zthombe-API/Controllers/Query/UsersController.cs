@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Zthombe_API.Models;
 
 namespace Zthombe_API.Controllers.Query
@@ -19,8 +20,31 @@ namespace Zthombe_API.Controllers.Query
         [HttpGet]
         public IActionResult GetUser(Guid userId)
         {
-            var user = zthombeContext.Users.Where(p => p.UserId == userId).FirstOrDefault();
-            return Ok(user);
+            //Create View Model
+            //Create mapping profile
+            //Only return count of posts
+
+            var user = zthombeContext.Users
+                .Include(u => u.Posts)
+                .Where(p => p.UserId == userId).FirstOrDefault();
+            if (user != null)
+            {
+                return Ok(user);
+            }
+            return BadRequest();
+        }
+
+        [Route("firebaseUser/{fireId}")]
+        [HttpGet]
+        public IActionResult GetUserByFireId(string fireId)
+        {
+            var user = zthombeContext.Users.Where(p => p.FirebaseUserId == fireId).FirstOrDefault();
+
+            if (user != null)
+            {
+                return Ok(user);
+            }
+            return BadRequest();
         }
     }
 }

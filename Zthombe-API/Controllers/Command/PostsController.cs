@@ -19,7 +19,7 @@ namespace Zthombe_API.Controllers.Command
         [HttpPost]
         [ProducesResponseType(typeof(PostModel), StatusCodes.Status200OK)]
         //[ProducesResponseType(typeof(IEnumerable<ValidationError>), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetPosts([FromBody] CreatePostModel request)
+        public async Task<IActionResult> CreatePost([FromBody] CreatePostModel request)
         {
             if (request.Title != null)
             {
@@ -39,5 +39,22 @@ namespace Zthombe_API.Controllers.Command
             return BadRequest();
         }
 
+        [Route("increment-view-count")]
+        [HttpPatch]
+        [ProducesResponseType(typeof(PostModel), StatusCodes.Status200OK)]
+        //[ProducesResponseType(typeof(IEnumerable<ValidationError>), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> IncrementViewCount([FromBody] PatchPostModel request)
+        {
+            var post = zthombeContext.Posts.Where(p => p.PostId == request.PostId).FirstOrDefault();
+
+            if (post != null)
+            {
+                post.ViewCount += 1;
+                var updated = await zthombeContext.SaveChangesAsync();
+
+                return Ok(updated);
+            }
+            return BadRequest();
+        }
     }
 }

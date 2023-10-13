@@ -30,8 +30,8 @@ namespace Zthombe_API.Controllers.Query
                     return Ok(zthombeContext.Posts.OrderByDescending(o => o.DateCreated).ToList());
                 case "Gifs":
                     return Ok(zthombeContext.Posts.Where(p => p.PostType == (int)PostType.Gifs));
-                case "Videos":
-                    return Ok(zthombeContext.Posts.Where(p => p.PostType == (int)PostType.Videos));
+                //case "Videos":
+                //    return Ok(zthombeContext.Posts.Where(p => p.PostType == (int)PostType.Videos));
             }
             return BadRequest();
         }

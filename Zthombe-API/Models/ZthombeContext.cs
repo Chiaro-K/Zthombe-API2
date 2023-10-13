@@ -47,7 +47,11 @@ public partial class ZthombeContext : DbContext
 
             entity.Property(e => e.UserId);
             entity.Property(e => e.Username).HasMaxLength(50);
+            entity.Property(e => e.FirstName).HasMaxLength(100);
+            entity.Property(e => e.LastName).HasMaxLength(100);
             entity.Property(e => e.FirebaseUserId).HasMaxLength(100);
+
+            entity.HasMany(e => e.Posts).WithOne(p => p.User);
         });
 
         OnModelCreatingPartial(modelBuilder);

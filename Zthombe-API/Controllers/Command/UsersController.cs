@@ -16,12 +16,5 @@ namespace Zthombe_API.Controllers.Command
         {
             this.zthombeContext = zthombeContext;
         }
-
-        [Route("{firebaseUserId}")]
-        [HttpGet]
-        public IActionResult GetUser(string postType)
-        {
-            return BadRequest();
-        }
     }
 }

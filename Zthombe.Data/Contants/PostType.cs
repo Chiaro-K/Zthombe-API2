@@ -5,8 +5,8 @@ namespace Zthombe.Data.Constants
   {
     Trending,
     Recent,
-    Gifs,
-    Videos
+    Gifs
+    //Videos
   }
 }
 
