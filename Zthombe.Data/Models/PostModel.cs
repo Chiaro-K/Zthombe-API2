@@ -21,5 +21,10 @@ namespace Zthombe.Data.Models
     {
         public Guid PostId { get; set; }
     }
+    public class SavePostModel
+    {
+        public Guid PostId { get; set; }
+        public Guid UserId { get; set; }
+    }
 }
 

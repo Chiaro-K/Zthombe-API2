@@ -18,6 +18,7 @@ public partial class ZthombeContext : DbContext
     public virtual DbSet<Post> Posts { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<SavedPosts> SavedPosts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -54,7 +55,16 @@ public partial class ZthombeContext : DbContext
             entity.HasMany(e => e.Posts).WithOne(p => p.User);
         });
 
-            entity.HasNoKey();
+        modelBuilder.Entity<SavedPosts>()
+            .Property(f => f.Id)
+            .ValueGeneratedOnAdd();
+
+        modelBuilder.Entity<SavedPosts>(entity =>
+        {
+            entity.HasOne(e => e.Post).WithMany().HasForeignKey(f => f.PostId).OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(e => e.User).WithMany().HasForeignKey(f => f.UserId).OnDelete(DeleteBehavior.NoAction);
+        });
+
         OnModelCreatingPartial(modelBuilder);
     }
 

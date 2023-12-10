@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using System.Numerics;
 using Zthombe.Data.Models;
 using Zthombe_API.Models;
@@ -38,12 +39,11 @@ namespace Zthombe_API.Controllers.Command
             }
             return BadRequest();
         }
-
         [Route("increment-view-count")]
         [HttpPatch]
         [ProducesResponseType(typeof(PostModel), StatusCodes.Status200OK)]
         //[ProducesResponseType(typeof(IEnumerable<ValidationError>), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> SavePost([FromBody] CreatePostModel request)
+        public async Task<IActionResult> IncrementViewCount([FromBody] PatchPostModel request)
         {
             var post = zthombeContext.Posts.Where(p => p.PostId == request.PostId).FirstOrDefault();
 
@@ -53,6 +53,28 @@ namespace Zthombe_API.Controllers.Command
                 var updated = await zthombeContext.SaveChangesAsync();
 
                 return Ok(updated);
+            }
+            return BadRequest();
+        }
+
+        [Route("save-post")]
+        [HttpPost]
+        [ProducesResponseType(typeof(PostModel), StatusCodes.Status200OK)]
+        //[ProducesResponseType(typeof(IEnumerable<ValidationError>), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> SavePost([FromBody] SavePostModel request)
+        {
+            var savedPost = new SavedPosts()
+            {
+                PostId = request.PostId,
+                UserId = request.UserId
+            };
+            await zthombeContext.AddAsync(savedPost);
+
+            var created = await zthombeContext.SaveChangesAsync();
+
+            if (created > 0)
+            {
+                return Ok(created);
             }
             return BadRequest();
         }

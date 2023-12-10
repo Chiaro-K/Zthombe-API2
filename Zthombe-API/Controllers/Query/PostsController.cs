@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Extensions;
 using Zthombe.Data.Constants;
 using Zthombe_API.Models;
@@ -58,6 +59,26 @@ namespace Zthombe_API.Controllers.Query
         public IActionResult GetPostTypes()
         {
             return Ok(Enum.GetValues(typeof(PostType)).Cast<PostType>().ToList());
+        }
+        [Route("savedPosts/{userId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetSavedPosts(Guid userId)
+        {
+            var savedPosts = await zthombeContext.SavedPosts
+                .Include(sp => sp.Post)
+                .Where(sp => sp.UserId == userId).ToListAsync();
+
+            return Ok(savedPosts.Select(sp => sp.Post));
+        }
+        
+        [Route("search/{term}")]
+        [HttpGet]
+        public async Task<IActionResult> SearchPostAsync(string term)
+        {
+            var post = await zthombeContext.Posts
+                .Where(p => p.Title.Contains(term) || (p.Description != null && p.Description.Contains(term)))
+                .ToListAsync();
+            return Ok(post);
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zthombe_API.Models;
 
@@ -11,9 +12,11 @@ using Zthombe_API.Models;
 namespace Zthombe_API.Migrations
 {
     [DbContext(typeof(ZthombeContext))]
-    partial class ZthombeContextModelSnapshot : ModelSnapshot
+    [Migration("20231210192856_add-saved-post-id")]
+    partial class addsavedpostid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
