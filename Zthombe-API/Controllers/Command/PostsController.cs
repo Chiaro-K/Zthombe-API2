@@ -43,7 +43,7 @@ namespace Zthombe_API.Controllers.Command
         [HttpPatch]
         [ProducesResponseType(typeof(PostModel), StatusCodes.Status200OK)]
         //[ProducesResponseType(typeof(IEnumerable<ValidationError>), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> IncrementViewCount([FromBody] PatchPostModel request)
+        public async Task<IActionResult> SavePost([FromBody] CreatePostModel request)
         {
             var post = zthombeContext.Posts.Where(p => p.PostId == request.PostId).FirstOrDefault();
 

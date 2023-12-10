@@ -54,6 +54,7 @@ public partial class ZthombeContext : DbContext
             entity.HasMany(e => e.Posts).WithOne(p => p.User);
         });
 
+            entity.HasNoKey();
         OnModelCreatingPartial(modelBuilder);
     }
 
