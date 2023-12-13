@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using System.Numerics;
 using Zthombe.Data.Models;
@@ -75,6 +76,27 @@ namespace Zthombe_API.Controllers.Command
             if (created > 0)
             {
                 return Ok(created);
+            }
+            return BadRequest();
+        }
+
+        [Route("unsave-post")]
+        [HttpDelete]
+        [ProducesResponseType(typeof(PostModel), StatusCodes.Status200OK)]
+        //[ProducesResponseType(typeof(IEnumerable<ValidationError>), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UnsavePost([FromBody] SavePostModel request)
+        {
+            var savedPost = await zthombeContext.SavedPosts.Where(p => p.PostId == request.PostId && p.UserId == request.UserId).FirstOrDefaultAsync();
+            if (savedPost != null)
+            {
+                zthombeContext.Remove(savedPost);
+            }
+
+            var removed = await zthombeContext.SaveChangesAsync();
+
+            if (removed > 0)
+            {
+                return Ok(removed);
             }
             return BadRequest();
         }

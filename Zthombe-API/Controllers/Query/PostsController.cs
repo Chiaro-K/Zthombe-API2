@@ -60,7 +60,7 @@ namespace Zthombe_API.Controllers.Query
         {
             return Ok(Enum.GetValues(typeof(PostType)).Cast<PostType>().ToList());
         }
-        [Route("savedPosts/{userId}")]
+        [Route("saved-posts/{userId}")]
         [HttpGet]
         public async Task<IActionResult> GetSavedPosts(Guid userId)
         {
@@ -70,7 +70,18 @@ namespace Zthombe_API.Controllers.Query
 
             return Ok(savedPosts.Select(sp => sp.Post));
         }
-        
+
+        [Route("saved-post/{postId}/{userId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetSavedPost(Guid postId, Guid userId)
+        {
+            var savedPost = await zthombeContext.SavedPosts
+                .Include(sp => sp.Post)
+                .Where(sp => sp.UserId == userId && sp.PostId == postId).FirstOrDefaultAsync();
+
+            return Ok(savedPost != null);
+        }
+
         [Route("search/{term}")]
         [HttpGet]
         public async Task<IActionResult> SearchPostAsync(string term)
