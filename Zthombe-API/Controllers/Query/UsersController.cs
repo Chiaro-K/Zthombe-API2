@@ -5,8 +5,8 @@ using Zthombe_API.Models;
 
 namespace Zthombe_API.Controllers.Query
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/users")]
     public class UsersController : ControllerBase
     {
         protected readonly ZthombeContext zthombeContext;

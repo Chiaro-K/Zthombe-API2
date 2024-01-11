@@ -8,8 +8,8 @@ using Zthombe_API.Models;
 
 namespace Zthombe_API.Controllers.Query
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/posts")]
     public class PostsController : ControllerBase
     {
         protected readonly ZthombeContext zthombeContext;

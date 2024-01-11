@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using Zthombe_API.Models;
 
@@ -24,7 +25,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Zthombe API",
+        Version = "1.0",
+        Description = "Product API for Zthombe"
+    });
+});
 builder.Services.AddDbContext<ZthombeContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Zthombe")));
 builder.Services.AddControllers().AddJsonOptions(x =>
@@ -43,9 +52,9 @@ builder.Services.AddMvc()
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseSwagger();
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
     app.UseSwaggerUI();
 }
 

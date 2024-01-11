@@ -7,8 +7,8 @@ using Zthombe_API.Models;
 
 namespace Zthombe_API.Controllers.Command
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/users")]
     public class UsersController : ControllerBase
     {
         protected readonly ZthombeContext zthombeContext;
